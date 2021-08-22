@@ -13,10 +13,10 @@ function App() {
       <Tabs>
         <div className="tab" label="All cats" >
           <div>
-            <h2 style={{display: 'flex'
-            ,justifyContent:'center'}} >
-              Cute little companions</h2>
+            
+              <div className="card-grid">
             <GetCats/>
+              </div>
           
           </div>
         </div>

@@ -4,7 +4,7 @@ import React from 'react'
 const STATUS_FETCHING = "fetching"
 const STATUS_FETCHED = "fetched"
 const API_KEY = 'c50f46cf-8ed0-402c-a5be-d41c7f559deb'
-let randomNum = Math.abs(Math.floor(Math.random() * 15))
+
 
 class FilterCats extends React.Component {
     state = {
@@ -25,9 +25,7 @@ class FilterCats extends React.Component {
         }),
         () => {
             fetch(
-                `https://api.thecatapi.com/v1/images/search?limit=${
-                    this.state.limit
-                }&page=${this.state.page}`,
+                `https://api.thecatapi.com/v1/images/search`,
                 {
                     headers: {
               "Content-Type": "application/json",
@@ -52,18 +50,27 @@ class FilterCats extends React.Component {
     this.setState({
       loadingState: STATUS_FETCHING
     });
-    fetch(
+    Promise.all([fetch(
       `https://api.thecatapi.com/v1/images/search?limit=${
         this.state.limit
       }&page=${this.state.page}`,
       {
         headers: {
             "Content-Type": "application/json",
-          "x-api-key": "4bebae0d-0ec4-4787-8e77-8602741525af"
+          "x-api-key": API_KEY
         }
       }
-    )
-      .then(data => data.json())
+      ),
+      fetch(`https://api.thecatapi.com/v1/breeds/`,
+      {
+        headers: {
+          "Content-Type": "application/json",
+          "x-api-key": API_KEY
+        }
+      })
+
+  ])
+      .then(data => Promise.all(data.map(data=> data.json())))
       .then(data => {
         this.setState({
           images: data.map(e => ({ id: e.id, url: e.url })),
@@ -83,15 +90,17 @@ class FilterCats extends React.Component {
           this.state.images.map(image => (
             <div className="imagePlaceholder" key={image.id}>
                 <a href={image.url} rel="noreferrer" target="_blank">
-              <img src={image.url} alt="Cat"  />
+              <img src={image.url} key={image.id} alt="Cat"  />
 
                 </a>
-             { console.log(this.state.images)}
+               
+             { console.log(this.state.images.id)}
+             <p>{JSON.stringify(this.state.images)}</p>
             </div>
           ))}
-        {this.state.loadingState === STATUS_FETCHED && (
+        {/* {this.state.loadingState === STATUS_FETCHED && (
           <button onClick={this.loadMore}>Show more</button>
-          )}
+          )} */}
       </div>
     )
   }

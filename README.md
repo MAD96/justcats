@@ -1,6 +1,10 @@
+This app is very straightforward, just select any image and It'll open a full-size version in a new tab.
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+
 
 ## Available Scripts
 

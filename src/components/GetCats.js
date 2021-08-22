@@ -1,4 +1,5 @@
 import React from "react"
+import '../App.css'
 
 const STATUS_FETCHING = "fetching"
 const STATUS_FETCHED = "fetched"
@@ -10,7 +11,7 @@ class GetCats extends React.Component {
         images: [],
         loadingState: STATUS_FETCHING,
         page: 0,
-        limit: 10
+        limit: 17
     };
     
     componentDidMount() {
@@ -58,7 +59,7 @@ class GetCats extends React.Component {
       {
         headers: {
             "Content-Type": "application/json",
-          "x-api-key": "4bebae0d-0ec4-4787-8e77-8602741525af"
+          "x-api-key": API_KEY
         }
       }
     )
@@ -75,12 +76,12 @@ class GetCats extends React.Component {
     return (
         <div className="gallery">
         {this.state.loadingState !== STATUS_FETCHED && (
-          <div className="loader">Cute cats incoming...</div>
+          <div className="loader">Cats incoming...</div>
           )}
         {this.state.loadingState !== STATUS_FETCHING &&
           this.state.images.length > 0 &&
           this.state.images.map(image => (
-            <div className="imagePlaceholder" key={image.id}>
+            <div className="card" key={image.id}>
                 <a href={image.url} rel="noreferrer" target="_blank">
               <img src={image.url} alt="Cat"  />
 
