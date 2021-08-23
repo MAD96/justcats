@@ -7,7 +7,11 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #4287f5;
+  background: rgb(2,0,36);
+background: -moz-linear-gradient(180deg, rgb(19, 98, 114) 0%, rgba(66,135,245,1) 48%, rgba(0,212,255,1) 100%);
+background: -webkit-linear-gradient(180deg, rgb(13, 110, 129) 0%, rgba(66,135,245,1) 48%, rgba(0,212,255,1) 100%);
+
+filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#020024",endColorstr="#00d4ff",GradientType=1);
 }
 
 h1 {
@@ -26,7 +30,7 @@ h1 {
 }
 
 .tab-list-active {
-  background-color: #4287f5;
+  background-color: rgba(0,212,255,1) ;
   border: solid #152642;
   border-width: 1px 1px 0 1px;
   font-weight: bolder;
